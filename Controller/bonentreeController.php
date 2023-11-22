@@ -23,4 +23,5 @@ if (isset($_POST['modifier'])){
     updateBonentree($num,$numbe,$date,$idf);
     header("location:http://localhost/gestioncaisse/?ok=listbone");
 }
+
 ?>

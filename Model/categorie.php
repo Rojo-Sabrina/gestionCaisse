@@ -5,7 +5,7 @@
     }
 
     function listCategorie(){
-        $sql = "SELECT * FROM categorie";
+        $sql = "SELECT * FROM categorie order by nom_categorie";
         return executeSQL($sql);
     }
 

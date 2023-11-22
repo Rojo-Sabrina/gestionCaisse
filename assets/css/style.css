@@ -1231,3 +1231,47 @@ h6 {
   font-size: 13px;
   color: #012970;
 }
+
+#numPad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+  position: absolute;
+  top: 160%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  /*margin-top: 10px;*/
+}
+
+/* Style pour les boutons */
+button {
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+}
+
+#inputField {
+  text-align: right; /* Aligner le texte à droite */
+  width: 205px;
+  height: 50px;
+  font-size: 28px;
+  position: absolute;
+  top: 20%;
+  left: 41%;
+  transform: translate(-50%, -50%);    
+}
+
+/* Style pour le bouton "C" (orange) */
+.clear-button {
+  background-color: orange;
+}
+
+/* Style pour le bouton "EFF" (rouge) */
+.delete-button {
+  background-color: red;
+}
+
+/* Style pour le bouton "OK" (vert) */
+.validate-button {
+  background-color: green;
+}

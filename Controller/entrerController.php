@@ -1,6 +1,7 @@
 <?php
 require_once '../Model/db.php';
 require_once '../Model/entrer.php';
+require_once '../Model/article.php';
 //Ajout
 if (isset($_POST['valider'])){
     $qte = $_POST['quantite'];
@@ -24,7 +25,7 @@ if (isset($_POST['modifier'])){
     $qte= $_POST['quantite'];
     $dateE = $_POST['date_entree'];
     $dateP = $_POST['date_peremption'];
-    $numbone = $_POST['num_bonentree'];
+    $numbone = $_POST['num_bonentree']; 
     $cat = $_POST['id_categorie'];
     $idart = $_POST['id_article'];
     $idpre = $_POST['id_presentation'];

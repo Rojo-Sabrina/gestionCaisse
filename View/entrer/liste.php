@@ -25,6 +25,28 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // Sélection de la catégorie
+            $('#categorie').on('change', function() {
+                // Récupération de l'id de la catégorie sélectionnée
+                var id_categorie = $(this).val();
+                // Requête AJAX pour récupérer la liste des articles de la catégorie sélectionnée
+                $.ajax({
+                    url: 'ajax.php',
+                    data: {id_categorie:id_categorie},
+                    type: 'POST',
+                    success: function(data) {
+                        // Récupération de la liste des articles
+                        $('#article').html(data);
+                    }
+                });
+            });
+        });
+    </script>
+
 
   </head>
 <body>
@@ -66,7 +88,7 @@
                     </div>
                     <div class="modal-body">
                             <!--formulaire ajout-->
-                            <form class="row g-3" method="POST" action="Controller/entrerController.php">
+                            <form class="row g-3" method="POST" action="Controller/entrerController.php" id="form_entrer">
                                 <div class="col-12">
                                 <label for="inputNanme4" class="form-label">Quantité</label>
                                 <input type="number" class="form-control" id="inputNanme4" name="quantite">
@@ -98,42 +120,29 @@
                                 </div>
 
                                 <div>
-                                <label>Catégorie</label>
-                                <select class="form-select" name="id_categorie">
-                                    <option value="">Choisissez la catégorie</option>
+                                    <label>Catégorie</label>
+                                    <select class="categorie form-select" id="categorie">
+                                        <option value="">Choisissez la catégorie</option>
                                         <?php
                                             require_once 'Model/db.php';
                                             require_once 'Model/categorie.php';
+                                            //Liste des catégories
                                             $lisc = listCategorie();
                                             while ($ligne = mysqli_fetch_row($lisc)) {
+                                                $selected = ($_POST['id_categorie'] == $ligne[0]) ? 'selected' : '';
                                                 echo "<option value='$ligne[0]'>$ligne[1]</option>";
-                                            } 
+                                            }
                                         ?>
                                     </select>
                                 </div>
 
                                 <div>
-                                 <label>Nom article</label>
-                                  <select class="form-select" name="id_article">
-                                    <option value="">Choisissez l'article</option>
-                                        <?php
-                                          //Connexion à la base de données
-                                            require_once 'Model/db.php';
-                                            require_once 'Model/article.php' ;
-                                          //Récuperer la catégorie selectionnée
-                                          $lisc = listArticle();
-                                          while ($ligne = mysqli_fetch_row($lisc)) {
-                                          echo "<option value='$ligne[0]'>$ligne[2]</option>";
-                                          //$selectedCategorie = isset($_POST['id_categorie']) ? $_POST['id_categorie'] : null;
-                                          //$lisart = listCatArticle($selectedCategorie);
-                                          //Afficher les options d'article
-                                           // while ($row = mysqli_fetch_row($lisart)) {
-                                               // echo "<option value='$row[0]'>$row[1]</option>";
-                                                //echo "<option value=' " . $row['id_article'] . "'>" . $row['nom_article'] . "</option>" ;
-                                            } 
-                                        ?>
-                                  </select>
+                                    <label>Nom de l'Article</label>
+                                    <select class="form-select" id="article">
+                                        <option value="">Choisissez une catégorie d'abord</option>
+                                    </select>
                                 </div>
+
 
                                 <div>
                                 <label>Libelés de la présentation</label>
@@ -200,8 +209,7 @@
     </div>
 </div>
 </main><!-- End #main -->
-      
-   
+    
   <!-- Vendor JS Files -->
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -215,5 +223,4 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 </body>
-
 </html>
